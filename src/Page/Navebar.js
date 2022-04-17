@@ -17,14 +17,15 @@ import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
 
+const clear_user = () =>{
+  localStorage.clear()
+}
 
 function Navebar(props) {
 
   const [sidebar, setSidebar] = useState(false);
 
   const showSidebar = () => setSidebar(!sidebar);
-
-  let username = props.username
 
 
   return (
@@ -64,9 +65,8 @@ function Navebar(props) {
                 <hr className='line' />
 
                 <div style={{ height: "1px" }} />
-                <p className='All-Services'><h4>All Services</h4></p>
                 <div className='Services'>
-                  <Link to="/" style={{ textDecoration: "none" }}><p className='font ser1 hover-services'><LogoutIcon className='icon-services' style={{ fontSize: "22px" }} /><span className='services-mt font'>ออกจากระบบ</span></p></Link>
+                  <Link to="/" style={{ textDecoration: "none" }}><p onClick={clear_user} className='font ser1 hover-services'><LogoutIcon className='icon-services' style={{ fontSize: "22px" }} /><span className='services-mt font'>ออกจากระบบ</span></p></Link>
                   
                 </div>
 
@@ -93,7 +93,7 @@ function Navebar(props) {
         <div>
 
           <button className='bbt bbt2'><Avatar src={X2}>H</Avatar></button>
-          <Link to={"/Index/Profile/"+username} className='Hoverline'>
+          <Link to={"/Index/Profile"} className='Hoverline'>
             <button className='bbt bbt3'><SettingsIcon /></button>
           </Link>
         </div>

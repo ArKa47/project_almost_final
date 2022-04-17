@@ -38,6 +38,9 @@ from bson.json_util import dumps
 import json
 import zmq
 import subprocess
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 ##
 
 import zmq
@@ -101,6 +104,25 @@ def terminate_MT4():
     else :
         return "MT4 aready close or tactical technic occur (MT4 did't start on standby MT4_process)(MT4_process Undefine)"
     return "close MT4 Sucsess"
+
+@app.route("/check_statistic_data/<symbol>/<timeframe>/<from_date>/<to_date>/<depth>/<diviation>/<backstep>")#Update statistic data
+def check_statistic_data(symbol, timeframe, from_date, to_date, depth, diviation, backstep):
+    timeframeName_in_json = "timeframe."+timeframe
+    zig_zagName_in_json = "zig_zag_parameter_"+depth+"_"+diviation+"_"+backstep
+    cursor = db.forex_stat.find({"name":symbol},{"_id":0,timeframeName_in_json+"."+zig_zagName_in_json:1})  #ค่าจาก Database  ###find({},{"_id":0,"x": 1}) first argument aka {} mean find everything and second argument {"_id":0,"x": 1} define what feel you want "1" mean yes "0" mean no
+    #convert "CURSOR" type that we have after request to mongoDB to a list so we can return and display them correctly
+    list_cursor = list(cursor)
+    timeframe_check_str = dumps(list_cursor)
+    # some JSON:
+    x =  '{ "status":"False"}'
+
+    # parse x:
+    y = json.loads(x)
+    if(timeframe_check_str == '[{"timeframe": {"'+timeframe+'": {}}}]'):#check will true if could not find anything in given zigzag argument #[{'+'"'+timeframeName_in_json+'"'+': {}}]
+        return y
+    else:
+        y["status"]="True"
+        return y
 
 @app.route("/update_statistic_data/<symbol>/<timeframe>/<from_date>/<to_date>/<depth>/<diviation>/<backstep>")#Update statistic data
 def update_statistic_data(symbol, timeframe, from_date, to_date, depth, diviation, backstep):
@@ -195,9 +217,9 @@ def signin(username, password, email):
 
 @app.route('/user/<username>',methods=['POST']) #login
 def user(username):
-    print(request.method)
+    #print(request.method)
     if request.method == 'POST':
-        cursor = db.user.find({"name":username},{"_id":0}) #[] what you looking for not here
+        cursor = db.user.find({"name":username},{"_id":0}) #[] mean what you looking for not here
         list_cursor = list(cursor)
         json_data = dumps(list_cursor)
         if json_data == "[]":
@@ -205,7 +227,7 @@ def user(username):
                 "name":"not found"
             }]
             x = dumps(x)
-            return x #no username found or wrong password status : false
+            return x #no username found status : false
         else:
             return json_data #flask aready wrap the return with the json
 
@@ -259,7 +281,7 @@ def psw_cc(username, psw, new_psw):
                 "status":"invalid"
             }]
             x = dumps(x)
-            return x #no username found or wrong password status : false
+            return x #no username not found or wrong password status : false
         else:
             insert_log = db.user.update_one({ "name": username}, { "$set": { "password": new_psw }})
             x = [{
@@ -267,6 +289,70 @@ def psw_cc(username, psw, new_psw):
             }]
             x = dumps(x)
             return x #flask aready wrap the return with the json
+
+@app.route('/psw_cc_forget/<username>/<new_psw>',methods=['POST']) #login
+def psw_cc_forget(username, new_psw):
+    print(request.method)
+    if request.method == 'POST':
+        cursor = db.user.find({"name":username},{"_id":0}) #[] what you looking for not here
+        list_cursor = list(cursor)
+        json_data = dumps(list_cursor)
+        if json_data == "[]":
+            x = [{
+                "status":"invalid"
+            }]
+            x = dumps(x)
+            return x #no username not found status : false
+        else:
+            insert_log = db.user.update_one({ "name": username}, { "$set": { "password": new_psw }})
+            x = [{
+                "status":"sucsess"
+            }]
+            x = dumps(x)
+            return x #flask aready wrap the return with the json
+
+@app.route('/send_email/<username>',methods=['POST']) #login
+def send_email(username):
+    #check if user exist first
+    cursor = db.user.find({"name":username},{"_id":0}) #[] mean what you looking for not here
+    list_cursor = list(cursor)
+    json_data = dumps(list_cursor)
+    if json_data == "[]":
+        x = [{
+            "status":"not found"
+        }]
+        x = dumps(x)
+        return x #no username found status : false
+    #
+    json_ = json.loads(json_data) #no need but leave it here in practice
+    email = list_cursor[0]["email"]
+
+    server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
+    sender_email = "tsender14@gmail.com"
+    password = "forexforsendertest_4582"
+    subject = 'forex_web_project greengrapth password change' # The subject line aka header
+    messageHTML = '<p>คุณได้ทำการขอเปลี่ยนรหัสผ่านจากเว็บไซต์ forex green graph <a href="http://localhost:3000/Index/Resetpassword/">click here<a> เพื่อทำการเปลี่ยนรหัส' #server change
+    #messagePlain = 'Visit nitratine.net for some great tutorials and projects!'
+
+    msg = MIMEMultipart('alternative')
+    msg['From'] = sender_email
+    msg['To'] = email
+    msg['Subject'] = subject
+
+    # Attach both plain and HTML versions
+    #msg.attach(MIMEText(messagePlain, 'plain'))
+    msg.attach(MIMEText(messageHTML, 'html'))
+    text = msg.as_string()
+
+    server.login(sender_email, password)
+    server.sendmail(sender_email, email, text)
+    server.quit()
+    ########################
+    x = [{
+    "status":"sucsess"
+    }]
+    x = dumps(x)
+    return x #flask aready wrap the return with the json
 
 @app.route('/mongo_test_return') #return ค่าตามพาท #debug
 def mongo_test_return(): #ฟังชั่น ที่จะทำอะไรก็ตาม แล้ว return ค่ากลับ 
@@ -1124,13 +1210,6 @@ def hist_request_dynamic(forex_name, timeframe_):
 
 @app.route("/hist_forex_request/<forex_name>/<timeframe>")# This is belong to flask
 def hist_forex_request(forex_name,timeframe):
-    #date weekly
-    x = datetime.datetime.now()
-    days = datetime.timedelta(7)
-    weekly = x - days
-    weekly = weekly.strftime('%Y.%m.%d')
-    weekly += " 00:00:00"
-
     #dict of the timeframe
     _timeframe_dict = {
         "M1" : 1,
@@ -1141,6 +1220,26 @@ def hist_forex_request(forex_name,timeframe):
         "H4" : 240,
         "D1" : 1440
     }
+
+    #dict of timeframe_token   #this represent how much day we gonna request for hist judge by timeframe   #we need like 100 sample for each timeframe
+    _timeframe_token = {
+        "M1" : 1, #days
+        "M5" : 5, #days
+        "M15" : 15, #days
+        "M30" : 10, #days
+        "H1" : 5, #days
+        "H4" : 17, #days
+        "D1" : 100 #days
+    }
+    time_token = _timeframe_token[timeframe]
+
+    #date weekly
+    x = datetime.datetime.now()
+    days = datetime.timedelta(days=time_token)
+    weekly = x - days
+    weekly = weekly.strftime('%Y.%m.%d')
+    weekly += " 00:00:00"
+
     _zmq._DWX_MTX_SEND_HIST_REQUEST_(_symbol=forex_name, _timeframe=_timeframe_dict[timeframe], _start=weekly)
     # some JSON:
     x =  '{}'
@@ -1152,6 +1251,7 @@ def hist_forex_request(forex_name,timeframe):
     try:
         forex_hist[forex_name] = _zmq._History_DB[forex_timeframe]
         forex_hist["timeframe"] = timeframe
+        forex_hist["timedelta"] = time_token
         #print(forex_hist)
         return forex_hist
     except:

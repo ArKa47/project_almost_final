@@ -13,6 +13,7 @@ import { useParams } from 'react-router-dom';
 
 function Profile() {
   const u = localStorage.getItem('username');
+  console.log(u)
   const [email, setEmail] = useState(0)
   const [error,setError] = useState(false); //technicl error
   const [perror,setPerror] = useState(false); // password wrong

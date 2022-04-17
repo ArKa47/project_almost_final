@@ -9,8 +9,51 @@ import Google from '../Img/Google.png'
 import BGM5 from '../Img/BGM6.jpg';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Paper } from '@mui/material';
+import { BrowserRouter as Router, Switch, 
+    Route, Redirect,useHistory} from "react-router-dom";
 
 function Reset() {
+    const history = useHistory();
+    const [open,setOpen] = React.useState(false)
+    const [helper,setHelper] = React.useState(false)
+
+    const handleClick= (e) => {
+        e.preventDefault()
+        const usr = document.getElementById('usr').value
+        setOpen(true)
+        
+        //call API
+        const ENDPOINT = "http://127.0.0.1:5000/send_email/"+usr
+        fetch(ENDPOINT, {
+          method: 'POST',
+          mode: 'cors'
+        })
+          .then( response =>{
+            if(response.ok){
+              console.log("In OK fetch")
+              return response.json()
+            }
+            throw response
+          })
+          .then(data =>{
+            //console.log("DATA = ",data);
+            //api_take=data //string
+            if(data[0].status == "sucsess"){
+                //alert(data[0].status)
+                localStorage.setItem('username_forgetpsw', usr);
+                history.push('/Index/ResetComplete/')
+              }
+            else{
+                //alert(data[0].status)
+                setOpen(false)
+                setHelper(true)
+            }
+          })
+          .catch(error => {
+            console.error("Error Fetching data" , error);
+          })
+        //history.push("/Index/ResetError/")
+    }
 
     return (
 
@@ -46,20 +89,18 @@ function Reset() {
 
                             <div >
                                 <h3>Reset Password</h3><br />
-                                <p className='font'>ใส่ Email ผู้ใช้ของคุณ
+                                <p className='font'>ใส่ Username ผู้ใช้ของคุณ
                         เพื่อเปลี่ยนรหัสผ่านของคุณ</p>
                                 <div style={{height:"50px"}}/>
-                                
-                                <TextField id="standard-basic" label="Email" variant="standard" style={{ width: "90%" }} /><br /><br />
+                                <form onSubmit={handleClick}>
+                                <TextField type={"text"} inputProps={{ pattern: "[A-Za-zก-๙0-9]*" }} required disabled={open} error={helper} helperText={helper ? "ไม่พบ username":""} id="usr" label="Username" variant="standard" style={{ width: "90%" }} /><br /><br />
 
                                 <div>
-                                    <Link to="/Index/ResetComplete/" className='linklog'>
-                                        <button className="Btsignin linkx">
-                                            Continue
-                                        </button><br /><br />
-                                    </Link>
+                                    <button type='submit' disabled={open} className="Btsignin linkx">
+                                        Continue
+                                    </button><br /><br />
                                 </div>
-                               
+                                </form>
 
                             </div>
 

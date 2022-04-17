@@ -41,6 +41,7 @@ function Updatedata() {
     const [success, setSuccess] = React.useState(false);
     const [loadingupdate, setLoadingupdate] = React.useState(false);
     const [open2, setOpen2] = React.useState(false);
+    const [open3, setOpen3] = React.useState(false);
     const timer = React.useRef();
     const [open, setOpen] = React.useState(false);
     const [select, setSelect] = React.useState("EURUSDgmp");
@@ -65,7 +66,51 @@ function Updatedata() {
     const handleClose = () => {
         setOpen2(false);
     };
+
+    const handleClose3 = () => {
+        setOpen3(false);
+        //
+        let fromD = document.getElementById('from_date').value
+        fromD = fromD.replaceAll('-', '.');
+        let toD = document.getElementById('to_date').value
+        toD = toD.replaceAll('-', '.');
+        let depth = document.getElementById('depth').value
+        let deviation = document.getElementById('deviation').value
+        let backstep = document.getElementById('backstep').value
+        //
+        //call an api
+        const ENDPOINT = "http://127.0.0.1:5000/update_statistic_data/"+select+"/"+Frame+"/"+fromD+"/"+toD+"/"+depth+"/"+deviation+'/'+backstep
+        fetch(ENDPOINT)
+          .then( response =>{
+            if(response.ok){
+              console.log("In OK fetch")
+              return response.json()
+            }
+            throw response
+          })
+          .then(data =>{
+            //console.log("DATA = ",data);
+            setDatao(data)
+
+            setPrevsymbol(select);
+            setPrevtimeframe(Frame);
+            setPrevdepth(depth)
+            setPrevdeviation(deviation)
+            setPrevbackstep(backstep)
+
+            setSuccess(!false);
+            setLoading(!true);
+            setLoadingupdate(!true)
+            setOpen2(!false);
+          })
+          .catch(error => {
+            console.error("Error Fetching data" , error);
+          })
+    };
   
+    const handleCancel = () =>{
+        setOpen3(false);
+    }
 
     const handleChange2 = (event) => {
         setSelect(event.target.value);
@@ -186,7 +231,7 @@ function Updatedata() {
             setOpen2(false);
             ///////////////////////////////
 
-            const ENDPOINT = "http://127.0.0.1:5000/update_statistic_data/"+select+"/"+Frame+"/"+fromD+"/"+toD+"/"+depth+"/"+deviation+'/'+backstep
+            const ENDPOINT = "http://127.0.0.1:5000/check_statistic_data/"+select+"/"+Frame+"/"+fromD+"/"+toD+"/"+depth+"/"+deviation+'/'+backstep
             fetch(ENDPOINT)
               .then( response =>{
                 if(response.ok){
@@ -197,18 +242,40 @@ function Updatedata() {
               })
               .then(data =>{
                 console.log("DATA = ",data);
-                setDatao(data)
-
-                setPrevsymbol(select);
-                setPrevtimeframe(Frame);
-                setPrevdepth(depth)
-                setPrevdeviation(deviation)
-                setPrevbackstep(backstep)
-
-                setSuccess(!false);
-                setLoading(!true);
-                setLoadingupdate(!true)
-                setOpen2(!false);
+                if(data["status"] == "True"){
+                    console.log("data = true")
+                    setOpen3(true)
+                }else{
+                    console.log("data = false")
+                    //call another API 
+                    const ENDPOINT = "http://127.0.0.1:5000/update_statistic_data/"+select+"/"+Frame+"/"+fromD+"/"+toD+"/"+depth+"/"+deviation+'/'+backstep
+                    fetch(ENDPOINT)
+                      .then( response =>{
+                        if(response.ok){
+                          console.log("In OK fetch")
+                          return response.json()
+                        }
+                        throw response
+                      })
+                      .then(data =>{
+                        //console.log("DATA = ",data);
+                        setDatao(data)
+        
+                        setPrevsymbol(select);
+                        setPrevtimeframe(Frame);
+                        setPrevdepth(depth)
+                        setPrevdeviation(deviation)
+                        setPrevbackstep(backstep)
+        
+                        setSuccess(!false);
+                        setLoading(!true);
+                        setLoadingupdate(!true)
+                        setOpen2(!false);
+                      })
+                      .catch(error => {
+                        console.error("Error Fetching data" , error);
+                      })
+                }
               })
               .catch(error => {
                 console.error("Error Fetching data" , error);
@@ -235,13 +302,38 @@ function Updatedata() {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
-                        ได้ทำการแก้ไขข้อูลผู้ใช้สำเร็จแล้วกดยืนยันเพื่อปิดข้อความนี้
+                        ได้ทำการแก้ไขข้อูลสำเร็จแล้วกดยืนยันเพื่อปิดข้อความนี้
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                   
                     <Button onClick={handleClose} autoFocus>
                         ยืนยัน
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog
+                open={open3}
+                onClose={handleClose3}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"คำเตือน"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        ข้อมูลดังกล่าวมีอยู่ในดาต้าเบสแล้ว ต้องการอัพเดททับเลยหรือไม่?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  
+                    <Button onClick={handleClose3} autoFocus>
+                        ยืนยัน
+                    </Button>
+                    <Button onClick={handleCancel} autoFocus>
+                        ยกเลิก
                     </Button>
                 </DialogActions>
             </Dialog>

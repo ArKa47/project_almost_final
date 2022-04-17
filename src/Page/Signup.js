@@ -91,8 +91,10 @@ function Signup() {
                             <div >
                                 <h3>Sign up</h3><br />
                                 <form onSubmit={handleSignIn}>
-                                <TextField type={'text'} inputProps={{ pattern: "[A-Za-zก-๙0-9]*"}} required error={error} helperText={error ? "duplicate username":""} id="usr" label="Username" variant="standard" color='primary' style={{ width: "90%" }} /><br /><br />
-                                <TextField type={'password'} inputProps={{ pattern: "[A-Za-zก-๙0-9]*"}} required id="psw" label="Password" variant="standard" style={{ width: "90%" }} /><br /><br />
+                                <TextField type={'text'} inputProps={{ pattern: "[A-Za-z0-9]{8,31}"}} required error={error} helperText={error ? "duplicate username":""} id="usr" label="Username" variant="standard" color='primary' style={{ width: "90%" }} /><br /><br />
+                                <p className='format'>อนุญาตให้ใช้เฉพาะตัวอักษร (a-Z) ,ตัวเลข(0-9) และมีความยาว8-31ตัว </p>
+                                <TextField type={'password'} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required id="psw" label="Password" variant="standard" style={{ width: "90%" }} /><br /><br />
+                                <p className='format'>อนุญาตให้ใช้เฉพาะตัวอักษร (a-Z) ,ตัวเลข(0-9) และมีความยาว 6 ตัวขึ้นไป </p>
                                 <TextField type={'email'} inputProps={{ pattern: "[A-Za-zก-๙0-9@.]*"}} required id="email" label="Email" variant="standard" style={{ width: "90%" }} /><br /><br />
 
                                 <div>

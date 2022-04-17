@@ -69,7 +69,7 @@ function hist_gra_handle(obj, name, timeframe) // wrapper for showing charts to 
     //console.log("grom hist gra hanlde = ",obj)//debug purpose
   try{
     //name = name+"_"+timeframe_
-    return <HistChart forex_obj={obj[name]} name={name} timeframe={timeframe}/> /** this is for hist chart */
+    return <HistChart forex_obj={obj[name]} name={name} timeframe={timeframe} timedelta={obj["timedelta"]}/> /** this is for hist chart */
   }catch(e){
     return <p>Loading</p>
   }
@@ -108,6 +108,7 @@ function GPForex() {
 
     //useState and variable
     const [timeframe_, setTimeframe_] = useState("M5");
+    const [count, setCount] = useState(300000);
     const [hist, setHist] = useState(null); // useState vairable use to keep the value of the history
     const [stream, setStream] = useState({
         stream : null,
@@ -121,7 +122,7 @@ function GPForex() {
         console.log("socket instance", socket);
         socket.on("connect", () => {
           //console.log("this is socket ID ",socket.id);
-          console.log("EMIT??")
+          console.log("EMIT?? socketID = ", socket.id)
           //distribute_request()
           //distribute_request()
           //socket.emit('hist_request'); //debug purpose
@@ -149,18 +150,6 @@ function GPForex() {
               })
             //console.log("I am on request dynamic!!",obj)
         })
-
-        //mess with the time again
-        /*
-        const timer = setInterval(() => {
-            //console.log('Timeout called!', timeframe_);
-            //socket.emit('hist_request_dynamic', forex_name, timeframe_)
-          }, 6000);
-        return () => {
-            clearInterval(timer)
-        };
-        */
-        
         /*debug purpose
         socket.on('hist_request', (obj)=>{
         console.log(" I recieve yuor thing ! ", obj);
@@ -193,6 +182,33 @@ function GPForex() {
           })
         //console.log("I am in useEffect onChange timeframe click = ",timeframe_)
     }, [timeframe_])
+
+    useEffect(() => {
+        //mess with the time again
+        const timer = setInterval(() => {
+          console.log('Timeout called! '+count+" second pass!", timeframe_);
+          //update hist
+          const ENDPOINT = "http://127.0.0.1:5000/hist_forex_request/"+forex_name+"/"+timeframe_
+          fetch(ENDPOINT)
+            .then( response =>{
+              if(response.ok){
+                console.log("In OK fetch timer")
+                return response.json()
+              }
+              throw response
+            })
+            .then(data =>{
+              //console.log("DATA = ",data);
+              setHist(data);
+            })
+            .catch(error => {
+              console.error("Error Fetching data" , error);
+            })
+        }, count);
+      return () => {
+          clearInterval(timer)
+      };
+    }, [count])
     //*
 
     const [value, setValue] = React.useState(1);
@@ -205,12 +221,6 @@ function GPForex() {
 
     const handleClick = () => {
         setOpen(!open);
-    };
-
-    const [currency, setCurrency] = React.useState('M5');
-
-    const handleChange1 = (event) => {
-        setCurrency(event.target.value);
     };
 
     const StyledInputBase = styled(InputBase)(({ theme }) => ({
@@ -308,14 +318,14 @@ function GPForex() {
                                                     aria-label="scrollable force tabs example"
                                                     size='small'
                                                 >
-                                                    <Tab label="M1" onClick={()=>setTimeframe_("M1")}/>
-                                                    <Tab label="M5" onClick={()=>setTimeframe_("M5")}/>
-                                                    <Tab label="M15" onClick={()=>setTimeframe_("M15")}/>
-                                                    <Tab label="M30" onClick={()=>setTimeframe_("M30")}/>
-                                                    <Tab label="H1" onClick={()=>setTimeframe_("H1")}/>
-                                                    <Tab label="H4" onClick={()=>setTimeframe_("H4")}/>
-                                                    <Tab label="D1" onClick={()=>setTimeframe_("D1")}/>
-
+                                                    <Tab label="M1" onClick={()=> {setTimeframe_("M1"); setCount(30000)}}/> {/** 60000 / 2 */}
+                                                    <Tab label="M5" onClick={()=>{setTimeframe_("M5"); setCount(150000)}}/> {/** 300000 / 2 */}
+                                                    <Tab label="M15" onClick={()=>{setTimeframe_("M15"); setCount(450000)}}/> {/** 900000 / 2 */}
+                                                    <Tab label="M30" onClick={()=>{setTimeframe_("M30"); setCount(900000)}}/> {/** 1800000 / 2 */}
+                                                    <Tab label="H1" onClick={()=>{setTimeframe_("H1"); setCount(1800000)}}/> {/** 3600000 / 2 */}
+                                                    <Tab label="H4" onClick={()=>{setTimeframe_("H4"); setCount(7200000)}}/> {/** 14400000 / 2 */}
+                                                    <Tab label="D1" onClick={()=>{setTimeframe_("D1"); setCount(43200000)}}/> {/** 86400000 / 2 */}
+ 
                                                 </Tabs>
                                             </Box>
                                         </ThemeProvider>

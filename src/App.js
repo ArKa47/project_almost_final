@@ -6,6 +6,8 @@ import Signup from './Page/Signup';
 import Home from './Page/Home';
 import Profile from './Page/Profile';
 import Reset from './Page/Resetpw';
+import Reset_changepw from './Page/Resetpw_changepw';
+import ResetpwSucsess from './Page/ResetpwSucsess';
 import Forex from './Page/Forex';
 import Navebar from './Page/Navebar';
 import GPForex from './Page/GPForex';
@@ -37,6 +39,9 @@ function App() {
         </Route>
 
         <Route path='/Index/Reset/' component={Reset} />
+        <Route path='/Index/Resetpassword/' component={Reset_changepw} />
+        <Route path='/Index/ResetComplete/' component={ResetComplete}/>
+        <Route path='/Index/ResetpwSucsess/' component={ResetpwSucsess}/>
         <Route path='/Index/Forex/' component={Forex} />
 
         <Route path='/Index/GPForex/:forex_name'>
@@ -49,7 +54,6 @@ function App() {
 
         <Route path='/Index/Signup' component={Signup} />
         <Route path='/Index/SignupComplete/' component={SignupComplete}/>
-        <Route path='/Index/ResetComplete/' component={ResetComplete}/>
 
         <Route path='/Index/Admin'>
             <Admin />

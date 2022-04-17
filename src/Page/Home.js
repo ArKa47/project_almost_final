@@ -13,17 +13,23 @@ import Navebar from './Navebar';
 
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, 
+  Route, Redirect,useHistory} from "react-router-dom";
 
 export default function ButtonAppBar() {
-  let { username } = useParams()
+  //let { username } = useParams()
   const u = localStorage.getItem('username');
+  const history = useHistory();
   console.log("usr  = "+u)
+  if( u == null){
+    history.push("/")
+  }
 
   return (
 
     <div>
 
-      <Navebar username={username} />
+      <Navebar/>
 
       <div className='zin'>
 

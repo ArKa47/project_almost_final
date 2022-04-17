@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import '../App.css';
 
 function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
@@ -17,12 +18,13 @@ function create_row(direction){
         to_ = "⭸ "
     }
     else{
-        to_ = "⭷  "
+        to_ = "⭷ "
     }
     let buffer = []
+    buffer.push(<TableCell style={{position: "sticky", left: 0, zIndex: 4, padding:"5px 15px", backgroundColor:"#4DD69E", color:"white"}} align='center' size='small' >GC table</TableCell> )
     for(let i = 0; i<20; i++){
-        let str_=to_+(i+1)+"00"
-        buffer.push(<TableCell align="right">{str_}</TableCell>)
+        let str_=(i+1)+"00"
+        buffer.push(<TableCell style={{padding:"5px 0px", backgroundColor:"#4DD69E"}} className='tablestyle' size='small' align='center'> <span  style={{color:"white"}}>{to_}</span> {str_} </TableCell>)
     }
     return <>{buffer}</>
 }
@@ -30,16 +32,16 @@ function create_row(direction){
 function ThisIs_create_row_for_data( direction, index , data2D_for_table){
     let from_ = ""
     if(direction == "from_high"){
-        from_ = "⭷  "
+        from_ = "⭷"
     }
     else{
-        from_ = "⭸ "
+        from_ = "⭸"
     }
 
     let buffer = []
     let max = 0
-    let str_ = from_+(index+1)+"00"
-    buffer.push(<TableCell style={{fontSize:"90%"}} key={"name"+index} align="right">{str_}</TableCell>)
+    let str_ = (index+1)+"00"
+    buffer.push(<TableCell style={{position: "sticky", left: 0, backgroundColor: "#4DD69E", padding:"5px 1px"}} size='small' key={"name"+index} align="center"> <span  style={{color:"white"}}>{from_}</span> {str_}</TableCell>)
     for(let i = 0; i<20; i++){
         let str_=data2D_for_table[index][i]
         if(str_ > max){
@@ -50,15 +52,15 @@ function ThisIs_create_row_for_data( direction, index , data2D_for_table){
     if(max == 0){
         for(let i = 0; i<20; i++){
             let str_=data2D_for_table[index][i]
-            buffer.push(<TableCell style={{color: "blue"}} key={i} align="right">{str_}</TableCell>)
+            buffer.push(<TableCell size='small' style={{color: "white", padding:"0px", backgroundColor:"#4D8DD6"}} key={i} align="center">{str_}</TableCell>)
         }
     }else{
         for(let i = 0; i<20; i++){
             let str_=data2D_for_table[index][i]
             if(str_ == max){
-                buffer.push(<TableCell style={{color: "red"}} key={i} align="right">{str_}</TableCell>)
+                buffer.push(<TableCell size='small' style={{color: "white", padding:"0px", backgroundColor:"#D64D4D"}} key={i} align="center">{str_}</TableCell>)
             }else{
-                buffer.push(<TableCell key={i} align="right">{str_}</TableCell>)
+                buffer.push(<TableCell size='small' style={{padding:"0px"}} key={i} align="center">{str_}</TableCell>)
             }
         }
     }
@@ -158,10 +160,9 @@ export default function BasicTable(props) {
     }
   return (
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table stickyHeader sx={{ minWidth: 650}} size="small" aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>GC table</TableCell> 
             {create_row(direction)}
           </TableRow>
         </TableHead>

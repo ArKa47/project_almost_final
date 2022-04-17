@@ -15,10 +15,6 @@ let color = 'rgba(0, 0, 0, 1)';
 let red = 'rgba(255, 99, 132, 1)' //red
 let sea_green = 'rgba(46, 139, 87, 1)' //sea green
 
-var weekly = new Date();
-weekly.setDate( weekly.getDate() - 7 );
-var date = new Date();
-
 const HistChart = (props) => {
     let close = [];
     let open = [];
@@ -27,15 +23,20 @@ const HistChart = (props) => {
     let time = [];
     const forex_name = props.name;
     let data = props.forex_obj
+    let timedelta = props.timedelta
     let  timeframe = props.timeframe
+    var from_date = new Date();
+    from_date.setDate( from_date.getDate() - timedelta );
+    var date = new Date();
+
     let show_dict = {
       "M1":110,
       "M5":100,
       "M15":90,
       "M30":80,
       "H1":70,
-      "H4":10,
-      "D1":7
+      "H4":30,
+      "D1":20
     } 
     //const myref = props.myref
     //console.log("this is data = ", data)
@@ -154,7 +155,7 @@ const HistChart = (props) => {
             plugins: {
               title: {
                   display: true,
-                  text: forex_name+" "+weekly.toLocaleDateString("en-US")+" -> "+date.toLocaleDateString("en-US"),
+                  text: forex_name+" "+from_date.toLocaleDateString("en-US")+" -> "+date.toLocaleDateString("en-US"),
                   font: {
                     size: 20
                   }
