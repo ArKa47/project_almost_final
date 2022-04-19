@@ -97,7 +97,7 @@ const theme = createTheme({
 
 const ENDPOINT = "http://127.0.0.1:5000"; // declared what sever to bind socket aka my sever
 const io = require('socket.io-client'); // declared socket that we aready install
-let socket = io(ENDPOINT) //declered this variable to handle all the socket even aka bind it to the **const io = require('socket.io-client'); **
+let socket = io(ENDPOINT, { autoConnect: false }) //declered this variable to handle all the socket even aka bind it to the **const io = require('socket.io-client'); **
 /////////////////////
 function GPForex() {
 
@@ -118,29 +118,13 @@ function GPForex() {
 
     useEffect(() => {
         console.log("in useEffect")
+        socket.connect();
         //console.log("cahrt instance = ",chartRef.current)
         console.log("socket instance", socket);
         socket.on("connect", () => {
-          //console.log("this is socket ID ",socket.id);
           console.log("EMIT?? socketID = ", socket.id)
-          //distribute_request()
-          //distribute_request()
-          //socket.emit('hist_request'); //debug purpose
-          /*
-          sleep(3000).then(() => {// * unfortunately it run once... I want it to loop run let change it!
-            // Do something after the sleep!
-            console.log("In use effect but wihe the 1 sec time out let's see what will run out!")
-          });
-          */
-          //
         });
         socket.emit('forex_request_dynamic',forex_name);
-        /*
-        socket.on('hist_request_dynamic', (obj)=>{//well you gonna have like all the timeframe you need in one go  and we'll manage it later
-            //console.log(" I recieve yuor dynamic thing ! ", obj);//debug purpose
-            setHist(obj)
-        })
-        */
         socket.on('forex_request_dynamic', (obj)=>{//well you gonna have like all the timeframe you need in one go  and we'll manage it later
             //console.log(" I recieve yuor dynamic thing ! ", obj);//debug purpose
             setStream({
@@ -150,11 +134,9 @@ function GPForex() {
               })
             //console.log("I am on request dynamic!!",obj)
         })
-        /*debug purpose
-        socket.on('hist_request', (obj)=>{
-        console.log(" I recieve yuor thing ! ", obj);
-        })
-        */
+        return () => {
+          socket.close() //close socket on unmount
+        }
     }, []);
 
     useEffect(() => {

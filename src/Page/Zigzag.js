@@ -277,7 +277,7 @@ function Forex() {
                   <Grid container spacing={2}>
                     <Grid item xs={6}>
                       <div style={{textAlign:"center"}}>
-                        <h3>ภาพรวม One Up - Many down ⭷  ⭸</h3>
+                        <h3>ภาพรวม Up - down ⭷  ⭸</h3>
                         <div style={{ height: "10px" }} />
                         {datao && timeframe && zigzag && <BasicTable datao={datao} timeframe={timeframe} zigzag={zigzag} direction="from_high" gc="from_Hight_to_Low_aka_GC"></BasicTable>}
                       </div>
@@ -286,7 +286,7 @@ function Forex() {
 
                     <Grid item xs={6}>
                       <div style={{textAlign:"center"}}>
-                        <h3>ภาพรวม One Down - Many up ⭸  ⭷  </h3>
+                        <h3>ภาพรวม Down - up ⭸  ⭷  </h3>
                         <div style={{ height: "10px" }} />
                         {datao && timeframe && zigzag && <BasicTable datao={datao} timeframe={timeframe} zigzag={zigzag} direction="from_low" gc="from_Low_To_Hight_aka_GC"></BasicTable>}
                       </div>
@@ -307,7 +307,7 @@ function Forex() {
                         aria-labelledby="nested-list-subheader"
                         subheader={
                           <ListSubheader component="div" id="nested-list-subheader" style={{textAlign:"center"}}>
-                            <span className='fontlowtoh' style={{fontWeight:"bold"}}><h3>One Up - Many down ⭷  ⭸</h3></span>
+                            <span className='fontlowtoh' style={{fontWeight:"bold"}}><h3>Up - down ⭷  ⭸</h3></span>
                           </ListSubheader>
                         }
                       >
@@ -545,7 +545,7 @@ function Forex() {
                         aria-labelledby="nested-list-subheader"
                         subheader={
                           <ListSubheader component="div" id="nested-list-subheader" style={{textAlign:"center"}}>
-                            <span className='fontlowtoh' style={{fontWeight:"bold"}}><h3>One Down - Many up ⭸  ⭷ </h3></span>
+                            <span className='fontlowtoh' style={{fontWeight:"bold"}}><h3>Down - up ⭸  ⭷ </h3></span>
                           </ListSubheader>
                         }
                       >

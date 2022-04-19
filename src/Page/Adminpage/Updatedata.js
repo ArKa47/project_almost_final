@@ -110,6 +110,13 @@ function Updatedata() {
   
     const handleCancel = () =>{
         setOpen3(false);
+
+        setPrevsymbol(select);
+        setPrevtimeframe(Frame);
+
+        setSuccess(!false);
+        setLoading(!true);
+        setLoadingupdate(!true)
     }
 
     const handleChange2 = (event) => {

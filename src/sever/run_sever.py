@@ -948,7 +948,7 @@ class DWX_ZeroMQ_Connector():
                                                                    
                         
                             if self._verbose:
-                                print("\n[" + _symbol + "] " + _timestamp + " (" + _bid + "/" + _ask + ") BID/ASK"+"  "+msg)              
+                                print("\n[" + _symbol + "] " + _timestamp + " (" + _bid + "/" + _ask + ") BID/ASK"+"  "+msg) # This is what you see when forex bid/ask requesst          
                     
                             # Update Market Data DB
                             if _symbol not in self._Market_Data_DB.keys():
@@ -1126,87 +1126,6 @@ def _DWX_ZMQ_CLEANUP_(_name='DWX_ZeroMQ_Connector',
 import datetime
 
 _zmq = DWX_ZeroMQ_Connector()
-
-@socketio.on('message')
-def handleMessage(msg):
-	print('Message: ' + msg)
-	send(msg, broadcast=True)
-
-@socketio.on('connect')
-def test_connect():
-    print('CONNECT EVENT happened...')
-    emit('my response', {'data': 'Connected'})
-
-@socketio.on('forex_request')
-def forex_request():
-    _zmq._DWX_MTX_SUBSCRIBE_MARKETDATA_('EURUSDgmp')
-    _zmq._DWX_MTX_SUBSCRIBE_MARKETDATA_('AUDCADgmp')
-    _zmq._DWX_MTX_SUBSCRIBE_MARKETDATA_('GBPUSDgmp')
-    _zmq._DWX_MTX_SUBSCRIBE_MARKETDATA_('CADCHFgmp')
-    _zmq._DWX_MTX_SUBSCRIBE_MARKETDATA_('EURAUDgmp')
-    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('EURUSDd')
-    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('AUDCADd')
-    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('GBPUSDd')
-    _zmq._DWX_MTX_SEND_TRACKPRICES_REQUEST_(['EURUSDgmp','AUDCADgmp','GBPUSDgmp', 'EURAUDgmp', 'CADCHFgmp'])
-    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('EURUSDd')
-    #print(_zmq._thread_data_output)
-    #print(_zmq._get_response_())
-    #print('forex request success')
-    emit('forex_request', _zmq._Market_Data_DB_last_tick_only)
-    
-@socketio.on('hist_request')
-def hist_request():
-    x = datetime.datetime.now()
-    days = datetime.timedelta(7)
-    weekly = x - days
-    weekly = weekly.strftime('%Y.%m.%d')
-    weekly += " 00:00:00"
-
-    _zmq._DWX_MTX_SEND_HIST_REQUEST_(_symbol='EURUSDgmp', _timeframe=5, _start=weekly)
-    _zmq._DWX_MTX_SEND_HIST_REQUEST_(_symbol='GBPUSDgmp', _timeframe=5, _start=weekly)
-    _zmq._DWX_MTX_SEND_HIST_REQUEST_(_symbol='AUDCADgmp', _timeframe=5, _start=weekly)
-    _zmq._DWX_MTX_SEND_HIST_REQUEST_(_symbol='CADCHFgmp', _timeframe=5, _start=weekly)
-    _zmq._DWX_MTX_SEND_HIST_REQUEST_(_symbol='EURAUDgmp', _timeframe=5, _start=weekly)
-    print('on hist request')
-    #print(_zmq._thread_data_output)
-    #print(_zmq._History_DB)
-    emit('hist_request', _zmq._History_DB)
-
-@socketio.on('hist_request_dynamic')#this come with dynamic hist request by require andd argument to this "emit"?
-def hist_request_dynamic(forex_name, timeframe_):
-    #date weekly
-    x = datetime.datetime.now()
-    days = datetime.timedelta(7)
-    weekly = x - days
-    weekly = weekly.strftime('%Y.%m.%d')
-    weekly += " 00:00:00"
-
-    #dict of the timeframe
-    _timeframe_dict = {
-        "M1" : 1,
-        "M5" : 5,
-        "M15" : 15,
-        "M30" : 30,
-        "H1" : 60,
-        "H4" : 240,
-        "D1" : 1440
-    }
-    _zmq._DWX_MTX_SEND_HIST_REQUEST_(_symbol=forex_name, _timeframe=_timeframe_dict[timeframe_], _start=weekly)
-    # some JSON:
-    x =  '{}'
-
-    # parse x:
-    forex_hist = json.loads(x)
-    #forex_timeframe
-    forex_timeframe = forex_name+"_"+timeframe_
-    try:
-        forex_hist[forex_name] = _zmq._History_DB[forex_timeframe]
-        forex_hist["timeframe"] = timeframe_
-        #print(forex_hist)
-        emit('hist_request_dynamic', forex_hist)
-    except:
-        #print("try again")
-        emit('hist_request_dynamic', "try again")
 
 @app.route("/hist_forex_request/<forex_name>/<timeframe>")# This is belong to flask
 def hist_forex_request(forex_name,timeframe):
