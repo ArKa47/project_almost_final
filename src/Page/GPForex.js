@@ -98,6 +98,7 @@ const theme = createTheme({
 const ENDPOINT = "http://127.0.0.1:5000"; // declared what sever to bind socket aka my sever
 const io = require('socket.io-client'); // declared socket that we aready install
 let socket = io(ENDPOINT, { autoConnect: false }) //declered this variable to handle all the socket even aka bind it to the **const io = require('socket.io-client'); **
+let socketID = "POP A clot"
 /////////////////////
 function GPForex() {
 
@@ -118,15 +119,17 @@ function GPForex() {
 
     useEffect(() => {
         console.log("in useEffect")
+        window.addEventListener("beforeunload", handle); //if user f5 page
         socket.connect();
         //console.log("cahrt instance = ",chartRef.current)
         console.log("socket instance", socket);
-        socket.on("connect", () => {
-          console.log("EMIT?? socketID = ", socket.id)
-        });
-        socket.emit('forex_request_dynamic',forex_name);
-        socket.on('forex_request_dynamic', (obj)=>{//well you gonna have like all the timeframe you need in one go  and we'll manage it later
-            //console.log(" I recieve yuor dynamic thing ! ", obj);//debug purpose
+
+        console.log("EMIT?? socketID = ", socket.id)
+        socketID = socket.id
+        socket.emit('forex_request_dynamic_private', forex_name, socket.id);
+
+        socket.on('forex_request_dynamic_private', (obj)=>{//well you gonna have like all the timeframe you need in one go  and we'll manage it later
+            console.log(" I recieve yuor dynamic thing ! ", obj);//debug purpose
             setStream({
                 ...stream,
                 stream : obj,// set stream to copy obj
@@ -135,9 +138,16 @@ function GPForex() {
             //console.log("I am on request dynamic!!",obj)
         })
         return () => {
+          window.removeEventListener("beforeunload", handle); //remove if user f5 page when user exist
+          socket.emit('left_room', forex_name);
           socket.close() //close socket on unmount
         }
     }, []);
+    const handle = (e) => {
+      e.preventDefault();
+      socket.emit('left_room', forex_name);
+      e.returnValue = "";
+    };
 
     useEffect(() => {
         // side effect here on change of any of props.x or stateY
@@ -168,7 +178,7 @@ function GPForex() {
     useEffect(() => {
         //mess with the time again
         const timer = setInterval(() => {
-          console.log('Timeout called! '+count+" second pass!", timeframe_);
+          //console.log('Timeout called! '+count+" second pass!", timeframe_);
           //update hist
           const ENDPOINT = "http://127.0.0.1:5000/hist_forex_request/"+forex_name+"/"+timeframe_
           fetch(ENDPOINT)

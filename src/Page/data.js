@@ -9,8 +9,8 @@ const data ={
 
         {
             id:2,
-            title: '2.GBPCAD'
-
+            title: '2.GBPCAD',
+            pathname:'/Index/GPForex/GBPCADgmp'
         },
 
         {

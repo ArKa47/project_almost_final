@@ -49,6 +49,7 @@ from pandas import DataFrame, Timestamp
 from threading import Thread
 # 30-07-2019 10:58 CEST
 from zmq.utils.monitor import recv_monitor_message
+from flask_socketio import join_room, leave_room
 from flask import Flask, redirect, url_for, request
 from flask_cors import CORS, cross_origin
 #***********************Crude SUMMARAY**********************
@@ -947,14 +948,14 @@ class DWX_ZeroMQ_Connector():
                             _bid, _ask = _data.split(string_delimiter)   
                                                                    
                         
-                            if self._verbose:
+                            if not self._verbose:
                                 print("\n[" + _symbol + "] " + _timestamp + " (" + _bid + "/" + _ask + ") BID/ASK"+"  "+msg) # This is what you see when forex bid/ask requesst          
                     
                             # Update Market Data DB
                             if _symbol not in self._Market_Data_DB.keys():
                                 self._Market_Data_DB[_symbol] = {}
                             
-                            self._Market_Data_DB[_symbol][_timestamp] = (float(_bid), float(_ask))
+                            ##self._Market_Data_DB[_symbol][_timestamp] = (float(_bid), float(_ask)) #defualt that i disable
                             # My_edit
                             try: #try if error mean first initial
                                 self._Market_Data_DB_last_tick_only[_symbol]["previous"] = self._Market_Data_DB_last_tick_only[_symbol]["stream"] #to see if error
@@ -966,7 +967,10 @@ class DWX_ZeroMQ_Connector():
                             #
                             # My_edit
                             #socketio.emit('test','I am test')
-                            socketio.emit('forex_request_dynamic', self._Market_Data_DB_last_tick_only)
+                            selected_symbol = {}
+                            selected_symbol[_symbol] = self._Market_Data_DB_last_tick_only[_symbol]
+                            room = _symbol+"_room" # _symbol ~ EURUSDgmp
+                            socketio.emit('forex_request_dynamic_private', selected_symbol, to=room)
                             #print('i am in stream')
                             #
 
@@ -1127,6 +1131,7 @@ import datetime
 
 _zmq = DWX_ZeroMQ_Connector()
 
+##### 1
 @app.route("/hist_forex_request/<forex_name>/<timeframe>")# This is belong to flask
 def hist_forex_request(forex_name,timeframe):
     #dict of the timeframe
@@ -1177,18 +1182,81 @@ def hist_forex_request(forex_name,timeframe):
         #print("try again")
         return "try again"
 
-@socketio.on('forex_request_dynamic')##I use this?
-def forex_request_dynamic(forex_name):
+##### 2
+########### use in (2 and 3)
+all_request = {}
+all_request["arr_forexname"] = []
+all_request["arr_quantity"] = {}
+###########
+@socketio.on('forex_request_dynamic_private')##I use this? #yes
+def forex_request_dynamic(forex_name, socketID):
+    #print(forex_name, socketID)
+    room = forex_name+"_room" # _symbol ~ EURUSDgmp #simply join the room of the specific symbol
+    join_room(room)
+    try: #try if error mean first initial
+        all_request["arr_quantity"][forex_name] += 1
+    except Exception as e:#if error(first initial) we set previous the same as stream
+        all_request["arr_quantity"][forex_name] = 1
+    
+    if forex_name not in all_request["arr_forexname"]:
+        all_request["arr_forexname"].append(forex_name)
+    print(all_request["arr_forexname"])
+    print(all_request["arr_quantity"][forex_name])
     _zmq._DWX_MTX_SUBSCRIBE_MARKETDATA_(forex_name)
     #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('EURUSDd')
     #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('AUDCADd')
     #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('GBPUSDd')
-    _zmq._DWX_MTX_SEND_TRACKPRICES_REQUEST_([forex_name])
+    _zmq._DWX_MTX_SEND_TRACKPRICES_REQUEST_(all_request["arr_forexname"])
     #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('EURUSDd')
     #print(_zmq._thread_data_output)
     #print(_zmq._get_response_())
     #print('forex request success')
-    emit('forex_request_dynamic', _zmq._Market_Data_DB_last_tick_only)
+    #emit('forex_request_dynamic_private', _zmq._Market_Data_DB_last_tick_only)
+
+##### 3
+@socketio.on("left_room")# test to close all trace and yes it work!
+def left_room(forex_name):
+    room = forex_name+"_room" # _symbol ~ EURUSDgmp #simply join the room of the specific symbol
+    leave_room(room)
+    try: #try if error mean first initial
+        all_request["arr_quantity"][forex_name] -= 1
+    except Exception as e:#if error(first initial) we set previous the same as stream
+        all_request["arr_quantity"][forex_name] = "NO this is error"
+
+    if all_request["arr_quantity"][forex_name] == 0 :
+        all_request["arr_forexname"].remove(forex_name)
+
+    print("array in leave_room after check zeo = ",all_request["arr_forexname"], " :: forex_name = ",forex_name)
+    _zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_(forex_name)
+    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('EURUSDd')
+    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('AUDCADd')
+    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('GBPUSDd')
+    _zmq._DWX_MTX_SEND_TRACKPRICES_REQUEST_(all_request["arr_forexname"])
+    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('EURUSDd')
+    #print(_zmq._thread_data_output)
+    #print(_zmq._get_response_())
+    #print('forex request success')
+    # some JSON:
+
+##### 4 this is flask not socket
+@app.route("/forex_shutdown")# test to close all trace and yes it work!
+def forex_shutdown():
+    _zmq._DWX_MTX_UNSUBSCRIBE_ALL_MARKETDATA_REQUESTS_()
+    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('EURUSDd')
+    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('AUDCADd')
+    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('GBPUSDd')
+    _zmq._DWX_MTX_SEND_TRACKPRICES_REQUEST_([])
+    #_zmq._DWX_MTX_UNSUBSCRIBE_MARKETDATA_('EURUSDd')
+    #print(_zmq._thread_data_output)
+    #print(_zmq._get_response_())
+    #print('forex request success')
+    # some JSON:
+    x =  '{}'
+
+    # parse x:
+    data = json.loads(x)
+    data["status"] = "unsub and tacking empty arraay sucsess"
+    return data
 
 if __name__ == '__main__':
 	socketio.run(app, debug=True)
@@ -1196,3 +1264,4 @@ if __name__ == '__main__':
 ####################################
 
 #Use find # My_edit to see where I add up some code in the source
+#Use #defualt that i disable

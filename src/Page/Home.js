@@ -24,7 +24,7 @@ export default function ButtonAppBar() {
   if( u == null){
     history.push("/")
   }
-
+  
   return (
 
     <div>
