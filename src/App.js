@@ -1,24 +1,24 @@
 import './App.css';
-import Index from './Page/Index';
-import Login from './Page/Login';
+import Index from './Project_forex/Page/Index';
+import Login from './Project_forex/Page/Login';
 import { BrowserRouter, Route, Router, HashRouter, Switch } from 'react-router-dom';
-import Signup from './Page/Signup';
-import Home from './Page/Home';
-import Profile from './Page/Profile';
-import Reset from './Page/Resetpw';
-import Reset_changepw from './Page/Resetpw_changepw';
-import ResetpwSucsess from './Page/ResetpwSucsess';
-import Forex from './Page/Forex';
-import Navebar from './Page/Navebar';
-import GPForex from './Page/GPForex';
-import ZigZag2 from './Page/Zigzag';
-import SignupComplete from './Page/SignupComplete';
-import ResetComplete from './Page/ResetComplete';
+import Signup from './Project_forex/Page/Signup';
+import Home from './Project_forex/Page/Home';
+import Profile from './Project_forex/Page/Profile';
+import Reset from './Project_forex/Page/Resetpw';
+import Reset_changepw from './Project_forex/Page/Resetpw_changepw';
+import ResetpwSucsess from './Project_forex/Page/ResetpwSucsess';
+import Forex from './Project_forex/Page/Forex';
+import Navebar from './Project_forex/Page/Navebar';
+import GPForex from './Project_forex/Page/GPForex';
+import ZigZag2 from './Project_forex/Page/Zigzag';
+import SignupComplete from './Project_forex/Page/SignupComplete';
+import ResetComplete from './Project_forex/Page/ResetComplete';
 
-import Admin from './Page/Adminpage/Admin';
-import Database from './Page/Adminpage/Database';
-import Userchangedata from './Page/Adminpage/Userchangedata'
-import Updatedata from './Page/Adminpage/Updatedata';
+import Admin from './Project_forex/Page/Adminpage/Admin';
+import Database from './Project_forex/Page/Adminpage/Database';
+import Userchangedata from './Project_forex/Page/Adminpage/Userchangedata'
+import Updatedata from './Project_forex/Page/Adminpage/Updatedata';
 
 function App() {
 

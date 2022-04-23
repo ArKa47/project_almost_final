@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Container, Grid, Paper } from '@mui/material';
-import '../App.css';
+import '../../App.css';
 import { height } from '@mui/system';
 import BGM5 from '../Img/BGM6.jpg';
 import MSD1 from '../Img/MSD1.jpg';

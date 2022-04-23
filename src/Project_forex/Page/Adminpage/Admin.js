@@ -1,6 +1,5 @@
 import { Avatar, Container, Grid } from '@mui/material';
-import '../../App.css';
-import Forexbg3 from '../../Img/Forexbg3.jpg';
+import '../../../App.css';
 import Navebar from './Navebaradmin';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';

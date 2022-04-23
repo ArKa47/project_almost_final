@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../../App.css';
+import '../../../App.css';
 import Avatar from '@mui/material/Avatar';
 import Logo from '../../Img/Logo.png';
 import Greenlogo from '../../Img/Greenlogo.png'

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Avatar, Container, Grid, Paper } from '@mui/material';
-import '../App.css';
+import '../../App.css';
 import { fontWeight, height } from '@mui/system';
 import BGM5 from '../Img/Forexbg.jpg';
 import MSD1 from '../Img/Stock.png';
@@ -275,7 +275,7 @@ function Forex() {
                   <div style={{ height: "20px" }} />
 
                   <Grid container spacing={2}>
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sx={12} md={12} lg={6}>
                       <div style={{textAlign:"center"}}>
                         <h3>ภาพรวม Up - down ⭷  ⭸</h3>
                         <div style={{ height: "10px" }} />
@@ -284,7 +284,7 @@ function Forex() {
                     </Grid>
                     <div style={{ height: "40px" }} />
 
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sx={12} md={12} lg={6}>
                       <div style={{textAlign:"center"}}>
                         <h3>ภาพรวม Down - up ⭸  ⭷  </h3>
                         <div style={{ height: "10px" }} />

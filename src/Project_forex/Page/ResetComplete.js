@@ -1,7 +1,7 @@
 import * as React from 'react';
-import '../App.css';
+import '../../App.css';
 import Logo from '../Img/Logo.png';
-import check_symbol from '../Img/check_symbol.png'
+import ResetEmail from '../Img/ResetEmail.png'
 import TextField from '@mui/material/TextField';
 import BGL from '../Img/BGL.png';
 import Fb from '../Img/Fb.png';
@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 
 
 
-function ResetpwSucsess() {
+function ResetComplete() {
 
     return (
 
@@ -49,20 +49,17 @@ function ResetpwSucsess() {
 
                             <div >
 
-                                <img src={check_symbol} className="imx2" style={{marginLeft:"31%",marginTop:"50px"}} />
+                                <img src={ResetEmail} className="imx2" style={{marginLeft:"31%",marginTop:"50px"}} />
 
 
-
-                                <div style={{textAlign:"center",marginLeft:"-60px", marginTop:"10px", marginBottom:"20px"}}>
-                                    <h3 style={{fontWeight:"400"}} className='font'>Reset Password ของท่านเรียบร้อย</h3>
+                                
+                                <div style={{textAlign:"center",marginLeft:"-60px"}}>
+                                    <h3 className='font'>ส่งข้อความไปยัง Email ของท่านแล้ว</h3>
                                 </div>
 
 
-                                <Link to="/">
-                                <button className="Btsignin linkx">
-                                        Continue
-                                </button><br /><br />
-                                </Link>
+
+
 
 
                             </div>
@@ -88,4 +85,4 @@ function ResetpwSucsess() {
 }
 
 
-export default ResetpwSucsess;
+export default ResetComplete;

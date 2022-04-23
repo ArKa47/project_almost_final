@@ -1285,6 +1285,9 @@ form .txt_field {
   margin-top: 10px;
 }
 
+.button-setting {
+  display: none;
+}
 
 @media (max-width: 991px) {
 
@@ -1628,6 +1631,10 @@ form .txt_field {
 
 
 @media (max-width:660px) {
+
+  .button-setting {
+    display: block;
+  }
 
   .textcom-forexai {
     font-size: 70%;

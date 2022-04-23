@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Avatar, Container, Grid } from '@mui/material';
-import '../App.css';
+import '../../App.css';
 import { fontWeight, height, textAlign } from '@mui/system';
 import BGM5 from '../Img/Forexbg.jpg';
 import MSD1 from '../Img/Stock.png';

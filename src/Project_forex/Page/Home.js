@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Grid } from '@mui/material';
-import '../App.css';
+import '../../App.css';
 import BGM5 from '../Img/CDS.jpg';
 import MSD1 from '../Img/MSD1.jpg';
 import MSD2 from '../Img/MSD2.jpg';
@@ -74,8 +74,8 @@ export default function ButtonAppBar() {
 
               <div className="BGX">
                 <img src={MSD2} className="im2" /><br /><div style={{ height: "10px" }} />
-                <h3 className='font size'>Forex และการแนะนำ</h3>
-                <p className="positiontext font">อันดับและการแนะนำ Forex ที่สำคัญใยแต่ละวันที่คุณไม่ควรพลาดเพื่อให้คุณตัดสินใจในการซื้อขายได้ดีขึ้น</p>
+                <h3 className='font size'>Forex</h3>
+                <p className="positiontext font">ดูข้อมูลคู่เงิน Forex ที่ท่านต้องการเช่นข้อมูล Bid/Ask หรือสถิติการกลับตัวของคู่เงิน Forex ของคู่เงินนั้นๆ</p>
 
                 <Link to="/Index/Forex" className='Textstart'>
                   <p className="positiontext positiontext2 font size ">เริ่มใช้งาน {">"}</p>

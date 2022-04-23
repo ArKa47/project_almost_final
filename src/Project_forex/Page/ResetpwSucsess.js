@@ -1,7 +1,7 @@
 import * as React from 'react';
-import '../App.css';
+import '../../App.css';
 import Logo from '../Img/Logo.png';
-import PPmb from '../Img/PPmb.png'
+import check_symbol from '../Img/check_symbol.png'
 import TextField from '@mui/material/TextField';
 import BGL from '../Img/BGL.png';
 import Fb from '../Img/Fb.png';
@@ -9,11 +9,11 @@ import Google from '../Img/Google.png'
 import BGM5 from '../Img/BGM6.jpg';
 import { Link } from 'react-router-dom';
 import { Container, Grid, Paper } from '@mui/material';
+import { useEffect } from 'react';
 
 
 
-
-function SignupComplete() {
+function ResetpwSucsess() {
 
     return (
 
@@ -49,28 +49,20 @@ function SignupComplete() {
 
                             <div >
 
-                                <img src={PPmb} className="imx2" style={{marginTop:"50px"}}/>
+                                <img src={check_symbol} className="imx2" style={{marginLeft:"31%",marginTop:"50px"}} />
 
 
 
-                                <div style={{textAlign:"center",marginLeft:"-60px"}}>
-                                    <h3 className='font'>สมัครสมาชิกสำเร็จ</h3>
-                                </div>
-
-                        <div style={{height:"50px"}}/>
-
-                                <div>
-                                    <Link to="/" className='linklog'>
-                                        <button className="Btsignin linkx">
-                                            Sign in
-                                        </button><br /><br />
-                                    </Link>
+                                <div style={{textAlign:"center",marginLeft:"-60px", marginTop:"10px", marginBottom:"20px"}}>
+                                    <h3 style={{fontWeight:"400"}} className='font'>Reset Password ของท่านเรียบร้อย</h3>
                                 </div>
 
 
-
-
-
+                                <Link to="/">
+                                <button className="Btsignin linkx">
+                                        Continue
+                                </button><br /><br />
+                                </Link>
 
 
                             </div>
@@ -96,4 +88,4 @@ function SignupComplete() {
 }
 
 
-export default SignupComplete;
+export default ResetpwSucsess;
