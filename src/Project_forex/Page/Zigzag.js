@@ -1,51 +1,23 @@
 import * as React from 'react';
 import { Avatar, Container, Grid, Paper } from '@mui/material';
 import '../../App.css';
-import { fontWeight, height } from '@mui/system';
-import BGM5 from '../Img/Forexbg.jpg';
-import MSD1 from '../Img/Stock.png';
-import MSD2 from '../Img/MSD2.jpg';
-import MSD3 from '../Img/MSD3.jpg';
-import Logo from '../Img/Logow.png';
-import Greenlogo from '../Img/GreenW.png'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
-import { Link } from 'react-router-dom';
-import SettingsIcon from '@mui/icons-material/Settings';
-import X2 from '../Img/Profile.jpg';
-import MenuIcon from '@mui/icons-material/Menu';
 import Navebar from './Navebar';
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import ThumbUpIcon from '@mui/icons-material/ThumbUp';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import Typography from '@mui/material/Typography';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ListSubheader from '@mui/material/ListSubheader';
 import List from '@mui/material/List';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import SendIcon from '@mui/icons-material/Send';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
-import StarBorder from '@mui/icons-material/StarBorder';
 import { useEffect, useState } from "react";
 import Forexbg3 from '../Img/Forexbg3.jpg'
-import EjectIcon from '@mui/icons-material/Eject';
 //te
 import { useParams } from 'react-router-dom';
 import Horizontal_Bar_Chart from '../component/Horizontal_Bar_Chart';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import BasicTable from '../component/table'
-import { KeyOff } from '@mui/icons-material';
 //*
 
 
@@ -58,7 +30,7 @@ const theme = createTheme({
 });
 
 function Forex() {
-
+  
   const [datao, setDatao] = useState(0);
   const [zigzag, setZigzag] = useState(0);
   const [timeframe, setTimeframe] = useState(0);

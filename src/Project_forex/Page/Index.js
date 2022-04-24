@@ -4,8 +4,6 @@ import '../../App.css';
 import BGM5 from '../Img/BGM6.jpg';
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
-import Fb from '../Img/Fb.png';
-import Google from '../Img/Google.png';
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, 
   Route, Redirect,useHistory} from "react-router-dom";

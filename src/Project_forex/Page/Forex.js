@@ -2,12 +2,9 @@ import { Avatar, Container, Grid } from '@mui/material';
 import '../../App.css';
 import Forexbg3 from '../Img/Forexbg3.jpg';
 import Navebar from './Navebar';
-import Paper from '@mui/material/Paper';
 import SearchIcon from '@mui/icons-material/Search';
-import Button from '@mui/material/Button';
 import data from './data';
 import React, { useState } from 'react';
-import { textAlign } from '@mui/system';
 import { Link } from 'react-router-dom';
 
 

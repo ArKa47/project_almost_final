@@ -1,6 +1,5 @@
 import './App.css';
 import Index from './Project_forex/Page/Index';
-import Login from './Project_forex/Page/Login';
 import { BrowserRouter, Route, Router, HashRouter, Switch } from 'react-router-dom';
 //project_stat
 import Signup from './Project_forex/Page/Signup';
@@ -34,7 +33,6 @@ function App() {
       <Switch>
         {/** Project_stat */}
         <Route exact path='/' component={Index} />
-        <Route path='/Index/Login/' component={Login} />
 
         <Route path='/Index/Home/'>
             <Home />

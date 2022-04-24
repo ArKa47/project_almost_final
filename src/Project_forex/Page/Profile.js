@@ -9,7 +9,6 @@ import TextField from '@mui/material/TextField';
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import Button from '@mui/material/Button';
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
 
 function Profile() {
   const u = localStorage.getItem('username');

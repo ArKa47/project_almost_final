@@ -56,7 +56,7 @@ export default function ButtonAppBar() {
             <Grid item xs={12} lg={3}>
               <div className="BGX" >
 
-                <img src={MSD1} className="im2" /><br /><div style={{ height: "10px" }} />
+                <img src={MSD1} alt={<a href="http://www.freepik.com">Designed by pch.vector / Freepik</a>} className="im2" /><br /><div style={{ height: "10px" }} />
                 <h3 className='font size'>บริการข่าวสารหุ้นแบบครบวงจร</h3>
                 <p className="positiontext font ">ข่าวสารเกี่ยวกับหุ้นต่างๆและ Forex ที่ช่วยให้ได้รู้ข่าวสารและช่วยให้คุณตัดสินใจในการซื้อหุ้นหรือค่าเงินได้ดีขึ้น</p>
 

@@ -1,14 +1,6 @@
 import * as React from 'react';
 import { Avatar, Container, Grid } from '@mui/material';
 import '../../App.css';
-import { fontWeight, height, textAlign } from '@mui/system';
-import BGM5 from '../Img/Forexbg.jpg';
-import MSD1 from '../Img/Stock.png';
-import MSD2 from '../Img/MSD2.jpg';
-import MSD3 from '../Img/MSD3.jpg';
-import Logo from '../Img/Logow.png';
-import Greenlogo from '../Img/GreenW.png'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import { Link } from 'react-router-dom';
 import Navebar from './Navebar';
 import Tabs from '@mui/material/Tabs';
