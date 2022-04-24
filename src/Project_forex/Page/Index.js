@@ -1,14 +1,7 @@
 import * as React from 'react';
 import { Container, Grid, Paper } from '@mui/material';
 import '../../App.css';
-import { height } from '@mui/system';
 import BGM5 from '../Img/BGM6.jpg';
-import MSD1 from '../Img/MSD1.jpg';
-import MSD2 from '../Img/MSD2.jpg';
-import MSD3 from '../Img/MSD3.jpg';
-import Logo from '../Img/Logo.png';
-import Greenlogo from '../Img/Greenlogo.png'
-import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Fb from '../Img/Fb.png';
@@ -16,6 +9,9 @@ import Google from '../Img/Google.png';
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, 
   Route, Redirect,useHistory} from "react-router-dom";
+import InputAdornment from '@mui/material/InputAdornment';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import LockIcon from '@mui/icons-material/Lock';
 
 function Index() {
   const history = useHistory();
@@ -97,9 +93,21 @@ function Index() {
               <div >
                 <h3>Sign in</h3><br />
                 <form onSubmit={handleUsernamePassword}>
-                  <TextField autoFocus required inputProps={{ pattern: "[A-Za-zก-๙0-9]*" }} error={error} type='text' name='nm' id="usr" label="Username" variant="standard" color='primary' style={{ width: "90%" }}  /><br /><br />
+                  <TextField InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <AccountCircle />
+                      </InputAdornment>
+                    ),
+                  }} autoFocus required error={error} type='text' name='nm' id="usr" label="Username" variant="standard" color='primary' style={{ width: "90%" }}  /><br /><br />
                   <p id="test_usr"></p>
-                  <TextField required inputProps={{ pattern: "[A-Za-zก-๙0-9]*" }} error={error} helperText={error ? "invalid username or password":""} type='password' id="psw" label="Password" variant="standard" style={{ width: "90%" }} /><br /><br />
+                  <TextField InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <LockIcon />
+                      </InputAdornment>
+                    ),
+                  }} required error={error} helperText={error ? "invalid username or password":""} type='password' id="psw" label="Password" variant="standard" style={{ width: "90%" }} /><br /><br />
                   <p id="test_psw"></p>
                   <button type='submit' className="Btsignin linkx">
                       Continue
@@ -114,15 +122,8 @@ function Index() {
 
                 <p className='P1' >No account? <Link to="/Index/Signup" className='linklog'>Create now</Link></p>
                 <div style={{ height: "20px" }} />
-                <div style={{ textAlign: "center" }}>
-                  <h3 style={{ marginLeft: "-60px" }}>or</h3>
-                  <div style={{ height: "20px" }} />
-
-                </div>
 
 
-                <button className='FB' style={{ backgroundColor: "#1045A1", color: "#ffffff" }}><img src={Fb} className="icon" style={{ width: "27px" }} /><span className='but1'>Continue with Facebook</span></button><br />
-                <button className='FB' style={{ backgroundColor: "#ffffff" }}><img src={Google} className="icon" style={{ marginLeft: "-65px", width: "25px" }} /><span className='but2'>Continue with Google</span></button><br />
 
 
               </div>

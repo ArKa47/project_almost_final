@@ -1,17 +1,12 @@
 import * as React from 'react';
 import '../../App.css';
-import Logo from '../Img/Logo.png';
-import Greenlogo from '../Img/Greenlogo.png'
 import TextField from '@mui/material/TextField';
-import BGL from '../Img/BGL.png';
-import Fb from '../Img/Fb.png';
-import Google from '../Img/Google.png'
 import BGM5 from '../Img/BGM6.jpg';
-import { Link } from 'react-router-dom';
 import { Container, Grid, Paper } from '@mui/material';
 import { BrowserRouter as Router, Switch, 
     Route, Redirect,useHistory} from "react-router-dom";
-
+import InputAdornment from '@mui/material/InputAdornment';
+import LockIcon from '@mui/icons-material/Lock';
 function Reset_changepw() {
     const history = useHistory();
     const [open, setOpen] = React.useState(false)
@@ -97,9 +92,23 @@ function Reset_changepw() {
                                 <p className='font'>ใส่ password ใหม่ของ {u}</p>
                                 <div style={{height:"50px"}}/>        
                                 <form onSubmit={handleClick}>
-                                <TextField type={"password"} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required disabled={open} id="psw" label="Password" variant="standard" style={{ width: "90%" }} /><br /><br />
+                                <TextField
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <LockIcon />
+                                      </InputAdornment>
+                                    ),
+                                  }} type={"password"} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required disabled={open} id="psw" label="Password" variant="standard" style={{ width: "90%" }} /><br />
                                 <p className='format'>อนุญาตให้ใช้เฉพาะตัวอักษร (a-Z) ,ตัวเลข(0-9) และมีความยาว 6 ตัวขึ้นไป </p>
-                                <TextField type={"password"} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required disabled={open} id="c_psw" error={error} helperText={error ? "กรุณาใส่ password ให้เหมือนกับด้านบน":""} label="Confirm password" variant="standard" style={{ width: "90%" }} /><br /><br />
+                                <TextField
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <LockIcon />
+                                      </InputAdornment>
+                                    ),
+                                  }} type={"password"} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required disabled={open} id="c_psw" error={error} helperText={error ? "กรุณาใส่ password ให้เหมือนกับด้านบน":""} label="Confirm password" variant="standard" style={{ width: "90%" }} /><br /><br />
                                 <div>
                                     <button type='submit' disabled={open} className="Btsignin linkx">
                                         Continue

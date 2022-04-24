@@ -68,7 +68,7 @@ function Forex() {
   useEffect(() => {
     // 
     console.log("in use effect")
-    const ENDPOINT = "http://127.0.0.1:5000/mongo_forexStat_request/EURUSDgmp"
+    const ENDPOINT = "http://127.0.0.1:5000/mongo_forexStat_request/"+forex_name
     fetch(ENDPOINT)
       .then( response =>{
         if(response.ok){
@@ -275,7 +275,7 @@ function Forex() {
                   <div style={{ height: "20px" }} />
 
                   <Grid container spacing={2}>
-                    <Grid item xs={12} sx={12} md={12} lg={6}>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl>
                       <div style={{textAlign:"center"}}>
                         <h3>ภาพรวม Up - down ⭷  ⭸</h3>
                         <div style={{ height: "10px" }} />
@@ -284,7 +284,7 @@ function Forex() {
                     </Grid>
                     <div style={{ height: "40px" }} />
 
-                    <Grid item xs={12} sx={12} md={12} lg={6}>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl>
                       <div style={{textAlign:"center"}}>
                         <h3>ภาพรวม Down - up ⭸  ⭷  </h3>
                         <div style={{ height: "10px" }} />

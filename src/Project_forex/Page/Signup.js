@@ -12,8 +12,10 @@ import { Container, Grid, Paper } from '@mui/material';
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, 
   Route, Redirect,useHistory} from "react-router-dom";
-
-
+import InputAdornment from '@mui/material/InputAdornment';
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import LockIcon from '@mui/icons-material/Lock';
+import MailIcon from '@mui/icons-material/Mail';
 
 
 function Signup() {
@@ -91,11 +93,32 @@ function Signup() {
                             <div >
                                 <h3>Sign up</h3><br />
                                 <form onSubmit={handleSignIn}>
-                                <TextField type={'text'} inputProps={{ pattern: "[A-Za-z0-9]{8,31}"}} required error={error} helperText={error ? "duplicate username":""} id="usr" label="Username" variant="standard" color='primary' style={{ width: "90%" }} /><br /><br />
+                                <TextField 
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <AccountCircle />
+                                      </InputAdornment>
+                                    ),
+                                  }} type={'text'} inputProps={{ pattern: "[A-Za-z0-9]{8,31}"}} required error={error} helperText={error ? "duplicate username":""} id="usr" label="Username" variant="standard" color='primary' style={{ width: "90%" }} /><br />
                                 <p className='format'>อนุญาตให้ใช้เฉพาะตัวอักษร (a-Z) ,ตัวเลข(0-9) และมีความยาว8-31ตัว </p>
-                                <TextField type={'password'} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required id="psw" label="Password" variant="standard" style={{ width: "90%" }} /><br /><br />
+                                <TextField
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <LockIcon />
+                                      </InputAdornment>
+                                    ),
+                                  }} type={'password'} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required id="psw" label="Password" variant="standard" style={{ width: "90%" }} /><br />
                                 <p className='format'>อนุญาตให้ใช้เฉพาะตัวอักษร (a-Z) ,ตัวเลข(0-9) และมีความยาว 6 ตัวขึ้นไป </p>
-                                <TextField type={'email'} inputProps={{ pattern: "[A-Za-zก-๙0-9@.]*"}} required id="email" label="Email" variant="standard" style={{ width: "90%" }} /><br /><br />
+                                <TextField
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <MailIcon />
+                                      </InputAdornment>
+                                    ),
+                                  }} type={'email'} inputProps={{ pattern: "[A-Za-zก-๙0-9@.]*"}} required id="email" label="Email" variant="standard" style={{ width: "90%" }} /><br /><br />
 
                                 <div>
                                     <button type='submit' className="Btsignin linkx">
@@ -103,16 +126,7 @@ function Signup() {
                                     </button><br /><br />
                                 </div>
                                 </form>
-                            
-                                <div style={{ textAlign: "center" }}>
-                                    <h3 style={{ marginLeft: "-60px" }}>or</h3>
-                                    <div style={{ height: "20px" }} />
-
-                                </div>
-
-
-                                <button className='FB' style={{ backgroundColor: "#1045A1", color: "#ffffff" }}><img src={Fb} className="icon" style={{ width: "27px" }} /><span className='but1'>Continue with Facebook</span></button><br />
-                                <button className='FB' style={{ backgroundColor: "#ffffff" }}><img src={Google} className="icon" style={{ marginLeft: "-65px", width: "25px" }} /><span className='but2'>Continue with Google</span></button><br />
+                        
 
 
                             </div>

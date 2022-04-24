@@ -178,7 +178,7 @@ function Profile() {
             <Grid item xs={12} >
               <div className="BG2" >
                 <h3 className='font'>การตั้งค่าโปรไฟล์</h3>
-                <p className="positiontext">จัดการชื่อและข้อมูลติดต่อของคุณ รายละเอียดส่วนตัวดังกล่าวเป็นความลับ และผู้ใช้รายอื่นจะไม่เห็นข้อมูลของคุณ</p>
+                <p className="positiontext">จัดการข้อมูลติดต่อของคุณ</p>
                 <div style={{ height: "10px" }} />
 
 

@@ -11,6 +11,8 @@ import { Link } from 'react-router-dom';
 import { Container, Grid, Paper } from '@mui/material';
 import { BrowserRouter as Router, Switch, 
     Route, Redirect,useHistory} from "react-router-dom";
+import InputAdornment from '@mui/material/InputAdornment';
+import AccountCircle from '@mui/icons-material/AccountCircle';
 
 function Reset() {
     const history = useHistory();
@@ -93,7 +95,14 @@ function Reset() {
                         เพื่อเปลี่ยนรหัสผ่านของคุณ</p>
                                 <div style={{height:"50px"}}/>
                                 <form onSubmit={handleClick}>
-                                <TextField type={"text"} inputProps={{ pattern: "[A-Za-zก-๙0-9]*" }} required disabled={open} error={helper} helperText={helper ? "ไม่พบ username":""} id="usr" label="Username" variant="standard" style={{ width: "90%" }} /><br /><br />
+                                <TextField
+                                InputProps={{
+                                    startAdornment: (
+                                      <InputAdornment position="start">
+                                        <AccountCircle />
+                                      </InputAdornment>
+                                    ),
+                                  }} type={"text"} inputProps={{ pattern: "[A-Za-zก-๙0-9]*" }} required disabled={open} error={helper} helperText={helper ? "ไม่พบ username":""} id="usr" label="Username" variant="standard" style={{ width: "90%" }} /><br /><br />
 
                                 <div>
                                     <button type='submit' disabled={open} className="Btsignin linkx">
