@@ -99,7 +99,7 @@ function Reset_changepw() {
                                         <LockIcon />
                                       </InputAdornment>
                                     ),
-                                  }} type={"password"} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required disabled={open} id="psw" label="Password" variant="standard" style={{ width: "90%" }} /><br />
+                                  }} type={"password"} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required disabled={open} id="psw" label="Password" variant="standard" style={{ width: "100%" }} /><br />
                                 <p className='format'>อนุญาตให้ใช้เฉพาะตัวอักษร (a-Z) ,ตัวเลข(0-9) และมีความยาว 6 ตัวขึ้นไป </p>
                                 <TextField
                                 InputProps={{
@@ -108,7 +108,7 @@ function Reset_changepw() {
                                         <LockIcon />
                                       </InputAdornment>
                                     ),
-                                  }} type={"password"} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required disabled={open} id="c_psw" error={error} helperText={error ? "กรุณาใส่ password ให้เหมือนกับด้านบน":""} label="Confirm password" variant="standard" style={{ width: "90%" }} /><br /><br />
+                                  }} type={"password"} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required disabled={open} id="c_psw" error={error} helperText={error ? "กรุณาใส่ password ให้เหมือนกับด้านบน":""} label="Confirm password" variant="standard" style={{ width: "100%" }} /><br /><br />
                                 <div>
                                     <button type='submit' disabled={open} className="Btsignin linkx">
                                         Continue

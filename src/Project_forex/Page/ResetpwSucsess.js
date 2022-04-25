@@ -41,15 +41,18 @@ function ResetpwSucsess() {
 
 
 
-                            <div >
+                        <div style={{textAlign:"center"}}>
 
-                                <img src={check_symbol} className="imx2" style={{marginLeft:"31%",marginTop:"50px"}} />
+                        <div >
+
+                            <img src={check_symbol} className="imx2" style={{ marginLeft: "-10px", marginTop: "50px" }} />
+
+                        </div>
 
 
-
-                                <div style={{textAlign:"center",marginLeft:"-60px", marginTop:"10px", marginBottom:"20px"}}>
-                                    <h3 style={{fontWeight:"400"}} className='font'>Reset Password ของท่านเรียบร้อย</h3>
-                                </div>
+                        <div style={{ textAlign: "center", marginTop: "10px", marginBottom: "20px" }}>
+                            <h3 style={{ fontWeight: "400" }} className='font'>Reset Password ของท่านเรียบร้อย</h3>
+                        </div>
 
 
                                 <Link to="/">

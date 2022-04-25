@@ -96,7 +96,7 @@ function Reset() {
                                         <AccountCircle />
                                       </InputAdornment>
                                     ),
-                                  }} type={"text"} inputProps={{ pattern: "[A-Za-zก-๙0-9]*" }} required disabled={open} error={helper} helperText={helper ? "ไม่พบ username":""} id="usr" label="Username" variant="standard" style={{ width: "90%" }} /><br /><br />
+                                  }} type={"text"} inputProps={{ pattern: "[A-Za-zก-๙0-9]*" }} required disabled={open} error={helper} helperText={helper ? "ไม่พบ username":""} id="usr" label="Username" variant="standard" style={{ width: "100%" }} /><br /><br />
 
                                 <div>
                                     <button type='submit' disabled={open} className="Btsignin linkx">

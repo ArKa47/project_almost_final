@@ -40,15 +40,15 @@ function ResetComplete() {
 
 
 
-                            <div >
+                        <div style={{textAlign:"center"}}>
 
-                                <img src={ResetEmail} className="imx2" style={{marginLeft:"31%",marginTop:"50px"}} />
+                        <img src={ResetEmail} className="imx2" style={{marginLeft:"-20px",marginTop:"50px"}} />
 
 
-                                
-                                <div style={{textAlign:"center",marginLeft:"-60px"}}>
-                                    <h3 className='font'>ส่งข้อความไปยัง Email ของท่านแล้ว</h3>
-                                </div>
+
+                        <div style={{textAlign:"center",marginLeft:"-20px",marginTop:"-40px"}}>
+                            <h3 className='font'>ส่งข้อความไปยัง Email ของท่านแล้ว</h3>
+                        </div>
 
 
 

@@ -221,9 +221,6 @@ function Profile() {
             </Grid>
           </Grid>
           <div style={{height:"20px"}}/>
-          <Link to="/" style={{textDecoration:"none"}}>
-            <button variant="contained" className='Close'>ออกจากระบบ</button>
-          </Link>
         </div>
 
 

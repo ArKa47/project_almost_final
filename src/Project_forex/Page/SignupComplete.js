@@ -42,17 +42,17 @@ function SignupComplete() {
 
 
 
-                            <div >
+                        <div style={{textAlign:"center"}}>
 
-                                <img src={PPmb} className="imx2" style={{marginTop:"50px"}}/>
+                        <img src={PPmb} className="imx2" style={{marginTop:"50px",marginLeft:"-20px"}}/>
 
 
 
-                                <div style={{textAlign:"center",marginLeft:"-60px"}}>
-                                    <h3 className='font'>สมัครสมาชิกสำเร็จ</h3>
-                                </div>
+                        <div style={{textAlign:"center",marginLeft:"-20px"}}>
+                            <h3 className='font'>สมัครสมาชิกสำเร็จ</h3>
+                        </div>
 
-                        <div style={{height:"50px"}}/>
+                        <div style={{height:"20px"}}/>
 
                                 <div>
                                     <Link to="/" className='linklog'>

@@ -94,7 +94,7 @@ function Signup() {
                                         <AccountCircle />
                                       </InputAdornment>
                                     ),
-                                  }} type={'text'} inputProps={{ pattern: "[A-Za-z0-9]{8,31}"}} required error={error} helperText={error ? "duplicate username":""} id="usr" label="Username" variant="standard" color='primary' style={{ width: "90%" }} /><br />
+                                  }} type={'text'} inputProps={{ pattern: "[A-Za-z0-9]{8,31}"}} required error={error} helperText={error ? "duplicate username":""} id="usr" label="Username" variant="standard" color='primary' style={{ width: "100%" }} /><br />
                                 <p className='format'>อนุญาตให้ใช้เฉพาะตัวอักษร (a-Z) ,ตัวเลข(0-9) และมีความยาว8-31ตัว </p>
                                 <TextField
                                 InputProps={{
@@ -103,7 +103,7 @@ function Signup() {
                                         <LockIcon />
                                       </InputAdornment>
                                     ),
-                                  }} type={'password'} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required id="psw" label="Password" variant="standard" style={{ width: "90%" }} /><br />
+                                  }} type={'password'} inputProps={{ pattern: "[A-Za-z0-9]{6,}"}} required id="psw" label="Password" variant="standard" style={{ width: "100%" }} /><br />
                                 <p className='format'>อนุญาตให้ใช้เฉพาะตัวอักษร (a-Z) ,ตัวเลข(0-9) และมีความยาว 6 ตัวขึ้นไป </p>
                                 <TextField
                                 InputProps={{
@@ -112,7 +112,7 @@ function Signup() {
                                         <MailIcon />
                                       </InputAdornment>
                                     ),
-                                  }} type={'email'} inputProps={{ pattern: "[A-Za-zก-๙0-9@.]*"}} required id="email" label="Email" variant="standard" style={{ width: "90%" }} /><br /><br />
+                                  }} type={'email'} inputProps={{ pattern: "[A-Za-zก-๙0-9@.]*"}} required id="email" label="Email" variant="standard" style={{ width: "100%" }} /><br /><br />
 
                                 <div>
                                     <button type='submit' className="Btsignin linkx">

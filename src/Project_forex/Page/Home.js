@@ -53,7 +53,7 @@ export default function ButtonAppBar() {
           <h2 className='font-Homeh2 font'>บริการภายในเว็บไซต์</h2>
           <div style={{ height: "20px" }} />
           <Grid container spacing={2}>
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} lg={4} xl={3}>
               <div className="BGX" >
 
                 <img src={MSD1} alt={<a href="http://www.freepik.com">Designed by pch.vector / Freepik</a>} className="im2" /><br /><div style={{ height: "10px" }} />
@@ -67,7 +67,7 @@ export default function ButtonAppBar() {
               </div>
             </Grid>
 
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} lg={4} xl={3}>
 
               <div className="BGX">
                 <img src={MSD2} className="im2" /><br /><div style={{ height: "10px" }} />
@@ -81,21 +81,19 @@ export default function ButtonAppBar() {
               </div>
             </Grid>
 
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} lg={4} xl={3}>
 
               <div className="BGX">
                 <img src={MSD3} className="im2" /><br /><div style={{ height: "10px" }} />
                 <h3 className='font size'>Ai Forex</h3>
                   <p className="positiontext font">เทรด Forex ด้วยระบบ Ai เพื่ออำนวยความสะดวกและเพิ่มรายได้ในการเทรดให้กับคุณในทุกๆสถานที่ทุกเวลา</p>
-                  <Link to="/Index/Forexai" className='Textstart'>
                   <p className="positiontext positiontext2 font size ">เริ่มใช้งาน {">"}</p>
-                </Link>
 
               </div>
 
             </Grid>
 
-            <Grid item xs={12} lg={3} >
+            <Grid item xs={12} lg={4} xl={3} >
               <div className="BGX">
                 <img src={MSD3} className="im2" /><br /><div style={{ height: "10px" }} />
                 <p><h3 className='font size'>บริการต่างๆในอนาคต</h3>
@@ -105,7 +103,7 @@ export default function ButtonAppBar() {
               </div>
             </Grid>
 
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} lg={4} xl={3}>
               <div className="BGX">
                 <img src={MSD3} className="im2" /><br /><div style={{ height: "10px" }} />
                 <p><h3 className='font size'>บริการต่างๆในอนาคต</h3>
@@ -115,7 +113,7 @@ export default function ButtonAppBar() {
               </div>
             </Grid>
 
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} lg={4} xl={3}>
               <div className="BGX">
                 <img src={MSD3} className="im2" /><br /><div style={{ height: "10px" }} />
                 <p><h3 className='font size'>บริการต่างๆในอนาคต</h3>
@@ -125,7 +123,7 @@ export default function ButtonAppBar() {
               </div>
             </Grid>
 
-            <Grid item xs={12} lg={3}>
+            <Grid item xs={12} lg={4} xl={3}>
               <div className="BGX">
                 <img src={MSD3} className="im2" /><br /><div style={{ height: "10px" }} />
                 <p><h3 className='font size'>บริการต่างๆในอนาคต</h3>

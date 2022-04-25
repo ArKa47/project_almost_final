@@ -16,6 +16,7 @@ import SmartToyIcon from '@mui/icons-material/SmartToy';
 import AutoAwesomeMotionIcon from '@mui/icons-material/AutoAwesomeMotion';
 import HomeIcon from '@mui/icons-material/Home';
 import LogoutIcon from '@mui/icons-material/Logout';
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 
 const clear_user = () =>{
   localStorage.clear()
@@ -53,7 +54,7 @@ function Navebar(props) {
                 <div style={{ height: "1px" }} />
                 <p className='All-Services'><h4>All Services</h4></p>
                 <div className='Services'>
-                  <Link to="/Index/Home" style={{ textDecoration: "none" }}><p className='font ser1 hover-services'> <span title="บริการข่าวสารหุ้น"><DnsIcon className='icon-services' style={{ fontSize: "22px" }} /></span> <span className='services-mt font'>บริการข่าวสารหุ้น</span></p></Link>
+                  <Link to="/Index/Home" style={{ textDecoration: "none" }}><p className='font ser1 hover-services'> <span title="บริการข่าวสารหุ้น"><NewspaperIcon className='icon-services' style={{ fontSize: "22px" }} /></span> <span className='services-mt font'>บริการข่าวสารหุ้น</span></p></Link>
                   <Link to="/Index/Forex" style={{ textDecoration: "none" }}><p className='font ser1 hover-services' style={{ marginTop: "-15px" }}> <span title="Forex"><EqualizerIcon className='icon-services' style={{ fontSize: "22px" }} /></span> <span className='services-mt font'>Forex</span></p></Link>
                   <Link to="/Index/Home" style={{ textDecoration: "none" }}><p className='font ser1 hover-services' style={{ marginTop: "-15px" }}> <span title="Ai Forex"><SmartToyIcon className='icon-services' style={{ fontSize: "22px" }} /></span> <span className='services-mt font'>Ai Forex</span></p></Link>
                   <Link to="/Index/Home" style={{ textDecoration: "none" }}><p className='font ser1 hover-services' style={{ marginTop: "-15px" }}> <span title="บริการเพิ่มเติม"><AutoAwesomeMotionIcon className='icon-services' style={{ fontSize: "22px" }} /></span> <span className='services-mt font'>บริการเพิ่มเติม</span></p></Link>

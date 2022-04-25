@@ -85,7 +85,7 @@ function Forex() {
           <div style={{ height: "0px" }} />
 
           <div className='BG-zigzag BG-zigzag2'>
-            <h4 className='font font-Homeh2' >คู่เงินทั้งหมด</h4>
+            <h4 className='font font-Homeh2 font-forex' >คู่เงินทั้งหมด</h4>
             <div style={{ height: "30px" }} />
             <Grid container spacing={3}>
               {dataSearch.map((item, index) => {

@@ -97,7 +97,7 @@ function Index() {
                         <AccountCircle />
                       </InputAdornment>
                     ),
-                  }} autoFocus required error={error} type='text' name='nm' id="usr" label="Username" variant="standard" color='primary' style={{ width: "90%" }}  /><br /><br />
+                  }} autoFocus required error={error} type='text' name='nm' id="usr" label="Username" variant="standard" color='primary' style={{ width: "100%" }}  /><br /><br />
                   <p id="test_usr"></p>
                   <TextField InputProps={{
                     startAdornment: (
@@ -105,7 +105,7 @@ function Index() {
                         <LockIcon />
                       </InputAdornment>
                     ),
-                  }} required error={error} helperText={error ? "invalid username or password":""} type='password' id="psw" label="Password" variant="standard" style={{ width: "90%" }} /><br /><br />
+                  }} required error={error} helperText={error ? "invalid username or password":""} type='password' id="psw" label="Password" variant="standard" style={{ width: "100%" }} /><br /><br />
                   <p id="test_psw"></p>
                   <button type='submit' className="Btsignin linkx">
                       Continue
