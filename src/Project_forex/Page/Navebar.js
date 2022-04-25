@@ -54,7 +54,7 @@ function Navebar(props) {
                 <div style={{ height: "1px" }} />
                 <p className='All-Services'><h4>All Services</h4></p>
                 <div className='Services'>
-                  <Link to="/Index/Home" style={{ textDecoration: "none" }}><p className='font ser1 hover-services'> <span title="บริการข่าวสารหุ้น"><NewspaperIcon className='icon-services' style={{ fontSize: "22px" }} /></span> <span className='services-mt font'>บริการข่าวสารหุ้น</span></p></Link>
+                  <Link to="/stockk/home" target="_blank" style={{ textDecoration: "none" }}><p className='font ser1 hover-services'> <span title="บริการข่าวสารหุ้น"><NewspaperIcon className='icon-services' style={{ fontSize: "22px" }} /></span> <span className='services-mt font'>บริการข่าวสารหุ้น</span></p></Link>
                   <Link to="/Index/Forex" style={{ textDecoration: "none" }}><p className='font ser1 hover-services' style={{ marginTop: "-15px" }}> <span title="Forex"><EqualizerIcon className='icon-services' style={{ fontSize: "22px" }} /></span> <span className='services-mt font'>Forex</span></p></Link>
                   <Link to="/Index/Home" style={{ textDecoration: "none" }}><p className='font ser1 hover-services' style={{ marginTop: "-15px" }}> <span title="Ai Forex"><SmartToyIcon className='icon-services' style={{ fontSize: "22px" }} /></span> <span className='services-mt font'>Ai Forex</span></p></Link>
                   <Link to="/Index/Home" style={{ textDecoration: "none" }}><p className='font ser1 hover-services' style={{ marginTop: "-15px" }}> <span title="บริการเพิ่มเติม"><AutoAwesomeMotionIcon className='icon-services' style={{ fontSize: "22px" }} /></span> <span className='services-mt font'>บริการเพิ่มเติม</span></p></Link>

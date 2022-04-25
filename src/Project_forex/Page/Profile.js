@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Avatar, Container, Grid, Paper } from '@mui/material';
 import '../../App.css';
-import BGM5 from '../Img/BGM6.jpg';
+import BGM5 from '../Img/BGM62.jpg';
 import { Link } from 'react-router-dom';
 import X2 from '../Img/Profile.jpg';
 import Navebar from './Navebar';
